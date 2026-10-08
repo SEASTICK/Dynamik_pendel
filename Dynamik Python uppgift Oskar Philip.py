@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 
-
 # DEL 1
 # FRILÄGGNING/RÖRELSEEKVATIONER, FÖRSTA ORDNINGENS SYSTEM
 # OCH NUMERISK LÖSNING MED solve_ivp
@@ -43,9 +42,7 @@ def MittSystem(t, u, g, k, c, m1, m2, a, L):
     ])
 
 
-
 # DEL 1.2 - MASSMATRIS
-
 
 def Massmatris(t, u, m1, m2, a):
 
@@ -57,7 +54,6 @@ def Massmatris(t, u, m1, m2, a):
     ])
 
     return M
-
 
 
 # DEL 1.3 - SYSTEMET OCH MASSMATRISEN
@@ -97,9 +93,7 @@ def System_med_massmatris(t, u, g, k, c, m1, m2, a, L):
     return u_dot
 
 
-
 # DEL 1.4 - PARAMETRAR
-
 
 g = 9.82
 a = 1
@@ -110,9 +104,7 @@ m1 = 1
 m2 = 1
 
 
-
 # DEL 1.5 - BEGYNNELSEVILLKOR
-
 
 z0 = 1.1
 theta0 = np.pi/6
@@ -127,7 +119,6 @@ u_0 = np.array([
 ])
 
 
-
 # DEL 1.6 - SIMULERINGSTID
 
 t_span = (0, 10)
@@ -137,7 +128,6 @@ t_eval = np.linspace(
     10,
     1000
 )
-
 
 
 # DEL 1.7 - INTEGRATIONSPARAMETRAR
@@ -151,7 +141,6 @@ ode_args = (
     a,
     L
 )
-
 
 
 # DEL 1.8 - ODE-LÖSAREN
@@ -168,7 +157,6 @@ sol = solve_ivp(
 )
 
 
-
 # DEL 1.9 - HÄMTA LÖSNINGARNA
 
 z = sol.y[0]
@@ -178,8 +166,8 @@ z_dot = sol.y[2]
 theta_dot = sol.y[3]
 
 
-
 # ANALYS AV DEN NUMERISKA LÖSNINGEN
+
 
 # DEL 2.1 - GRAF: z(t) OCH theta(t)
 
@@ -215,16 +203,12 @@ plt.grid()
 plt.tight_layout()
 
 
-
 # DEL 2.2 - MASSORNAS POSITIONER
-
 
 # m1
 
 x1 = z
-
 y1 = np.zeros_like(z)
-
 
 # m2
 
@@ -237,7 +221,6 @@ x2 = (
 y2 = (
     -a*np.cos(theta)
 )
-
 
 
 # DEL 2.3 - GRAF: m1 OCH m2:s POSITIONER I xy-PLANET
@@ -264,11 +247,8 @@ plt.title(
 )
 
 plt.legend()
-
 plt.grid()
-
 plt.axis('equal')
-
 
 
 # DEL 2.4 - SYSTEMETS TYNGDPUNKT
@@ -279,7 +259,6 @@ xG = (
     m2*x2
 ) / (m1+m2)
 
-
 yG = (
     m1*y1
     +
@@ -287,9 +266,7 @@ yG = (
 ) / (m1+m2)
 
 
-
 # DEL 2.5 - GRAF: TYNGDPUNKTENS POSITION
-# =============================================================================
 
 plt.figure()
 
@@ -307,13 +284,10 @@ plt.title(
 )
 
 plt.grid()
-
 plt.axis('equal')
 
 
-# =============================================================================
 # DEL 2.6 - AVSTÅND MELLAN MASSORNA
-# =============================================================================
 
 avstand = np.sqrt(
     (x2-x1)**2
@@ -322,9 +296,7 @@ avstand = np.sqrt(
 )
 
 
-# =============================================================================
 # DEL 2.7 - GRAF: AVSTÅND MELLAN m1 OCH m2
-# =============================================================================
 
 plt.figure()
 
@@ -344,17 +316,13 @@ plt.title(
 plt.grid()
 
 
-# =============================================================================
 # DEL 2.8 - ENERGI
-# =============================================================================
-
 
 # -----------------------------------------------------------------------------
 # Hastighet för m1
 # -----------------------------------------------------------------------------
 
 v1_x = z_dot
-
 v1_y = np.zeros_like(z_dot)
 
 
@@ -443,9 +411,7 @@ V = (
 E = T + V
 
 
-# =============================================================================
 # DEL 2.9 - GRAF: KINETISK, POTENTIELL OCH TOTAL ENERGI
-# =============================================================================
 
 plt.figure()
 
@@ -475,13 +441,10 @@ plt.title(
 )
 
 plt.legend()
-
 plt.grid()
 
 
-# =============================================================================
 # DEL 2.10 - FUNKTION FÖR ATT TESTA OLIKA PARAMETRAR
-# =============================================================================
 
 def solve_case(
     g_case,
@@ -518,9 +481,7 @@ def solve_case(
     return sol_case
 
 
-# =============================================================================
 # DEL 2.11 - DÄMPNING
-# =============================================================================
 
 # Uppgiften säger att c ska ökas.
 # Här jämförs c = 0, 1 och 2 Ns/m.
@@ -532,9 +493,7 @@ c_values = [
 ]
 
 
-# =============================================================================
 # DEL 2.12 - GRAF: DÄMPNINGENS PÅVERKAN
-# =============================================================================
 
 plt.figure()
 
@@ -564,7 +523,6 @@ for c_test in c_values:
         label='c = ' + str(c_test)
     )
 
-
 plt.xlabel('t [s]')
 plt.ylabel('z [m]')
 
@@ -573,7 +531,6 @@ plt.title(
 )
 
 plt.legend()
-
 plt.grid()
 
 
@@ -602,7 +559,6 @@ for c_test in c_values:
         label='c = ' + str(c_test)
     )
 
-
 plt.xlabel('t [s]')
 plt.ylabel('theta [rad]')
 
@@ -611,15 +567,12 @@ plt.title(
 )
 
 plt.legend()
-
 plt.grid()
 
 plt.tight_layout()
 
 
-# =============================================================================
 # DEL 2.13 - JÄMVIKTSLÄGE
-# =============================================================================
 
 # Jämviktsläget för systemet:
 #
@@ -635,7 +588,6 @@ u_jamvikt = np.array([
     0
 ])
 
-
 sol_jamvikt = solve_case(
     g,
     k,
@@ -648,12 +600,9 @@ sol_jamvikt = solve_case(
 )
 
 
-# =============================================================================
 # DEL 2.14 - GRAF: NUMERISK KONTROLL AV JÄMVIKT
-# =============================================================================
 
 plt.figure()
-
 
 plt.subplot(2, 1, 1)
 
@@ -693,9 +642,7 @@ plt.grid()
 plt.tight_layout()
 
 
-# =============================================================================
 # DEL 2.15 - MASSFÖRHÅLLANDE
-# =============================================================================
 
 # Tre olika värden på m2 jämförs.
 
@@ -706,12 +653,9 @@ m2_values = [
 ]
 
 
-# =============================================================================
 # DEL 2.16 - GRAFER: ÄNDRAT MASSFÖRHÅLLANDE
-# =============================================================================
 
 plt.figure()
-
 
 for i, m2_test in enumerate(m2_values):
 
@@ -755,16 +699,12 @@ for i, m2_test in enumerate(m2_values):
     plt.xlabel('t [s]')
 
     plt.legend()
-
     plt.grid()
-
 
 plt.tight_layout()
 
 
-# =============================================================================
 # DEL 2.17 - FJÄDERKONSTANT
-# =============================================================================
 
 # Tre olika värden på k jämförs.
 
@@ -775,12 +715,9 @@ k_values = [
 ]
 
 
-# =============================================================================
 # DEL 2.18 - GRAFER: ÄNDRAD FJÄDERKONSTANT
-# =============================================================================
 
 plt.figure()
-
 
 for i, k_test in enumerate(k_values):
 
@@ -822,21 +759,16 @@ for i, k_test in enumerate(k_values):
     plt.xlabel('t [s]')
 
     plt.legend()
-
     plt.grid()
-
 
 plt.tight_layout()
 
 
-# =============================================================================
 # DEL 2.19 - STORT VÄRDE PÅ m2
-# =============================================================================
 
 # Uppgiften föreslår att man testar exempelvis m2 = 100 kg.
 
 m2_stor = 100
-
 
 sol_stor_m2 = solve_case(
     g,
@@ -850,12 +782,9 @@ sol_stor_m2 = solve_case(
 )
 
 
-# =============================================================================
 # DEL 2.20 - GRAF: m2 = 100 kg
-# =============================================================================
 
 plt.figure()
-
 
 plt.subplot(2, 1, 1)
 
@@ -895,18 +824,12 @@ plt.grid()
 plt.tight_layout()
 
 
-# =============================================================================
 # DEL 2.21 - VISA ALLA GRAFER
-# =============================================================================
 
 plt.show()
 
 
-# =============================================================================
-# =============================================================================
 # DEL 2.22 - ANIMATION
-# =============================================================================
-# =============================================================================
 
 import matplotlib.animation as animation
 
@@ -918,12 +841,10 @@ import matplotlib.animation as animation
 z = sol.y[0]
 theta = sol.y[1]
 
-
 # m1
 
 x1 = z
 y1 = np.zeros_like(z)
-
 
 # m2
 
@@ -970,18 +891,15 @@ ax.set_aspect('equal')
 
 ax.grid()
 
-
 ax.set_xlim(
     np.min(x2)-0.5,
     np.max(x2)+0.5
 )
 
-
 ax.set_ylim(
     -1.2*a,
     0.4*a
 )
-
 
 ax.set_xlabel(
     r'$x$'
@@ -990,7 +908,6 @@ ax.set_xlabel(
 ax.set_ylabel(
     r'$y$'
 )
-
 
 ax.set_title(
     'Fjäder-pendelsystem'
